@@ -62,7 +62,7 @@ export const useStore = defineStore("store", {
 			const surpliers = new Suppliers(this.token);
 
 			return surpliers.get(number).then((result) => {
-				this.suppliers = result.data.results;
+				this.suppliers = result.data;
 
 				return result;
 			});

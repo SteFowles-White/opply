@@ -4,62 +4,16 @@
 			<h1>Supplier & Quotes</h1>
 			<h2>Welcome Stephen</h2>
 		</header>
-
-		<h2 class="supplier-header">List of our suppliers</h2>
-		<section class="content-container">
-			<div class="supplier-block" :class="[!hasSuppliers ? 'empty' : '']">
-				<div v-if="hasSuppliers" class="supplier-headings">
-					<p>Name of Supplier</p>
-				</div>
-				<div
-					v-for="(supplier, index) in store.suppliers"
-					:key="`${supplier.id}-${index}`"
-					class="supplier-card"
-				>
-					<SupplierCard :data="supplier" />
-				</div>
-				<Empty v-if="!hasSuppliers" value="suppliers" />
-			</div>
-		</section>
+		<h2 class="supplier-header">List of Suppliers</h2>
+		<Supplers />
 		<h2 class="supplier-header">List of quotes</h2>
-		<section class="content-container">
-			<div class="quotes-block" :class="[!hasQuotes ? 'empty' : '']">
-				<div
-					v-for="(supplier, index) in store.quotes"
-					:key="`${supplier.id}-${index}`"
-				>
-					<QuoteCard :data="supplier" />
-				</div>
-				<Empty v-if="!hasQuotes" value="quotes" />
-			</div>
-		</section>
+		<Quotes />
 	</div>
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
-import { useStore } from "../store/store";
-import SupplierCard from "../components/supplier-card.vue";
-import QuoteCard from "../components/quote-card.vue";
-import Empty from "../components/empty.vue";
-
-// Store
-const store = useStore();
-
-// Computed
-const hasSuppliers = computed(() => {
-	return store.suppliers.length;
-});
-
-const hasQuotes = computed(() => {
-	return store.quotes.length;
-});
-
-// Hooks
-onMounted(() => {
-	store.getSuppliers();
-	store.getQuotes();
-});
+import Supplers from "../components/supplers.vue";
+import Quotes from "../components/quotes.vue";
 </script>
 
 <style scoped>
@@ -116,35 +70,6 @@ onMounted(() => {
 	margin-bottom: 1.5rem;
 }
 
-.supplier-block {
-	padding: 1rem 1rem;
-}
-
-.supplier-block.empty {
-	display: flex;
-	justify-content: center;
-	margin: 1rem 0;
-}
-
-.supplier-headings {
-	display: grid;
-	grid-template-columns: 1fr;
-	column-gap: 1rem;
-	align-items: center;
-	width: 100%;
-	margin-bottom: 1rem;
-	font-size: 1rem;
-	font-weight: 600;
-}
-
-.supplier-headings p {
-	margin: 0;
-}
-
-.supplier-card {
-	margin-bottom: 1rem;
-}
-
 .quotes-block {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -162,10 +87,6 @@ onMounted(() => {
 }
 
 @media only screen and (max-width: 800px) {
-	.supplier-headings {
-		display: none;
-	}
-
 	.quotes-block {
 		grid-template-columns: 1fr;
 	}

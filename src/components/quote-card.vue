@@ -42,9 +42,11 @@ const formateDate = computed(() => {
 onMounted(() => {
 	const supplier = new Supplier(store.token);
 
-	supplier.fetchSupplier(props.data.supplier_id).then((result) => {
-		supplierDetails.value = result.data;
-	});
+	if (props.data.supplier_id) {
+		supplier.fetchSupplier(props.data.supplier_id).then((result) => {
+			supplierDetails.value = result.data;
+		});
+	}
 });
 </script>
 
