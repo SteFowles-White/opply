@@ -26,7 +26,8 @@ defineRule("username", (value) => {
 });
 
 defineRule("email", (value) => {
-	const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	const regex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+	const specialCharacter = /^[!#$%&’*+/=?^`{|}~]+@/;
 
 	// If the field is empty
 	if (!value || !value.length) {
@@ -34,7 +35,7 @@ defineRule("email", (value) => {
 	}
 
 	// If the field is not a valid email
-	if (!regex.test(value)) {
+	if (!regex.test(value) || specialCharacter.test(value)) {
 		return "This field must be a valid email address";
 	}
 

@@ -17,7 +17,11 @@ On accessing the /suppliers route you should see a list of all the suppliers fro
 
 If you would like to see more information about a given supplier click on the 'See more' button and it will provide you with the description of the supplier and the supplier code.
 
-# Known Issue // future development
+# Future development
 
 1: Pagination of the supplier and quotes is needed to be developed and implemented.
 2: Add a log out feature.
+
+# Issues
+
+1: Can still add an invalid email address such as stephen@yoyo.com - Althought this is not a required field it would be reviewed in more detail for production to ensure correct domain email address are used
