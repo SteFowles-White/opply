@@ -5,9 +5,12 @@
 			<Button class="supplier-button" @click.prevent="onClick">See more</Button>
 		</div>
 		<div class="collapse" v-if="showMore">
-			<div class="collapse-body">
+			<div v-if="!error" class="collapse-body">
 				<p>Supplier code: {{ companyCode(surplierDetails.name) }}</p>
 				<p>{{ data.description }}</p>
+			</div>
+			<div v-else class="collapse-body">
+				<h4>Unknown Surpliers Details</h4>
 			</div>
 		</div>
 	</div>
@@ -32,6 +35,7 @@ const props = defineProps({
 // State
 const showMore = ref(false);
 const surplierDetails = ref({});
+const error = ref(false);
 
 // Methods
 const onClick = () => {
@@ -46,7 +50,7 @@ const onClick = () => {
 				surplierDetails.value = result.data;
 			})
 			.catch((err) => {
-				console.log(err);
+				error.value = true;
 			});
 	}
 };

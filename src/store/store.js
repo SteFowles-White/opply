@@ -72,7 +72,6 @@ export const useStore = defineStore("store", {
 			const quotes = new Quotes(this.token);
 
 			return quotes.get().then((result) => {
-				console.log(result);
 				this.quotes = result.data.results;
 
 				return quotes;

@@ -57,8 +57,8 @@ const hasQuotes = computed(() => {
 
 // Hooks
 onMounted(() => {
-	store.getSuppliers().catch((err) => console.log(err));
-	store.getQuotes().catch((err) => console.log(err));
+	store.getSuppliers();
+	store.getQuotes();
 });
 </script>
 

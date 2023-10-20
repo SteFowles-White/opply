@@ -68,7 +68,6 @@ const showRegistrationType = () => {
 };
 
 const setErrorMessage = (err) => {
-	console.log(err);
 	if (err.response.status !== 400) {
 		errorMessage.value = "Unable to log in";
 
