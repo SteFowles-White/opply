@@ -20,3 +20,4 @@ If you would like to see more information about a given supplier click on the 'S
 # Known Issue // future development
 
 1: Pagination of the supplier and quotes is needed to be developed and implemented.
+2: Add a log out feature.
