@@ -7,7 +7,7 @@
 3: After this has installed the packages run npm run dev to set up the server
 4: Copy and past the url in ther termal and put it in your browser and you can start the app
 
-# I hope you enjoy the app and any comments on code or improvments I always happy to implement otherwise enjoy :)
+I hope you enjoy the app and any comments on code or improvments I always happy to implement otherwise enjoy :)
 
 # General Usage
 
