@@ -4,12 +4,13 @@ class Quotes extends APIRequest {
 	/**
 	 * Gets all quotes from suppliers
 	 *
+	 * @param id {Number}
 	 *
 	 * @return {Promise}
 	 *
 	 */
-	get(data) {
-		return this.makeRequest("get", "/api/v1/quotes/");
+	get(number) {
+		return this.makeRequest("get", `/api/v1/quotes/?page=${number}`);
 	}
 }
 
