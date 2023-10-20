@@ -1,0 +1,42 @@
+export default [
+	{
+		id: "username",
+		name: "Username",
+		type: "type",
+		maxlength: 150,
+		rules: "required|username|minMax:1,150",
+		default: true,
+	},
+	{
+		id: "password",
+		name: "Password",
+		type: "password",
+		maxlength: 150,
+		rules: "required|minMax:1,128",
+		default: true,
+	},
+	{
+		id: "first_name",
+		name: "First name",
+		type: "text",
+		maxlength: 150,
+		rules: "minMax:1,150",
+		default: false,
+	},
+	{
+		id: "last_name",
+		name: "Last name",
+		type: "text",
+		maxlength: 150,
+		rules: "minMax:1,150",
+		default: false,
+	},
+	{
+		id: "email",
+		name: "Email",
+		type: "email",
+		maxlength: 150,
+		rules: "email",
+		default: false,
+	},
+];
