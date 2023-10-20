@@ -1,15 +1,17 @@
 <template>
 	<div class="supplier-card">
-		<div class="supplier">
+		<div class="supplier-heading">
 			<h3>{{ formateHeading(data.name) }}</h3>
-			<Button class="supplier-button" @click.prevent="onClick">See more</Button>
+			<Button class="supplier-button" @click.prevent="onClick"
+				>{{ showMore ? "Hide" : "Show" }}
+			</Button>
 		</div>
-		<div class="collapse" v-if="showMore">
-			<div v-if="!error" class="collapse-body">
+		<div class="supplier-collapse" v-if="showMore">
+			<div v-if="!error" class="supplier-body">
 				<p>Supplier code: {{ companyCode(surplierDetails.name) }}</p>
 				<p>{{ data.description }}</p>
 			</div>
-			<div v-else class="collapse-body">
+			<div v-else class="supplier-body">
 				<h4>Unknown Surpliers Details</h4>
 			</div>
 		</div>
@@ -18,9 +20,9 @@
 
 <script setup>
 import { ref } from "vue";
-import Button from "./button.vue";
 import { useStore } from "../store/store";
 import Surpliers from "../api/endpoints/suppliers";
+import Button from "./button.vue";
 
 // Store
 const store = useStore();
@@ -56,20 +58,24 @@ const onClick = () => {
 };
 
 const formateHeading = (value) => {
-	return value.split("#")[0];
+	if (value) {
+		return value.split("#")[0];
+	}
 };
 
 const companyCode = (value) => {
-	return value.split("#")[1];
+	if (value) {
+		return value.split("#")[1];
+	}
 };
 </script>
 
 <style scoped>
 .supplier-card {
-	border: 3px solid var(--colour-light-blue);
+	border-bottom: 1px solid var(--colour-light-blue);
 }
 
-.supplier {
+.supplier-heading {
 	display: grid;
 	grid-template-columns: 1fr 9rem;
 	column-gap: 1rem;
@@ -78,8 +84,8 @@ const companyCode = (value) => {
 	padding: 0.25rem 0;
 }
 
-.supplier h3,
-.supplier p {
+.supplier-heading h3,
+.supplier-heading p {
 	margin: 0;
 	padding: 0 0.5rem;
 	font-size: 1rem;
@@ -90,16 +96,19 @@ const companyCode = (value) => {
 	margin-right: 0.5rem;
 }
 
-.collapse {
-	border-top: 3px solid var(--colour-light-blue);
+.supplier-collapse {
+	border-top: 1px solid var(--colour-light-blue);
+	background-color: var(--colour-white);
+	max-height: fit-content;
+	transition: max-height 0.9s ease-out;
 }
 
-.collapse-body {
+.supplier-body {
 	padding: 1rem;
 }
 
-@media only screen and (max-width: 800px) {
-	.supplier {
+@media only screen and (max-width: 460px) {
+	.supplier-heading {
 		text-align: center;
 		grid-template-columns: 1fr;
 	}

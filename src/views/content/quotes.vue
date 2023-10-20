@@ -2,7 +2,7 @@
 	<section class="content-container">
 		<div class="quotes-block" :class="[!hasQuotes ? 'empty' : '']">
 			<div
-				v-for="(supplier, index) in store.quotes"
+				v-for="(supplier, index) in store.quotes.results"
 				:key="`${supplier.id}-${index}`"
 			>
 				<QuoteCard :data="supplier" />
@@ -23,9 +23,13 @@
 
 <script setup>
 import { onMounted, ref, computed } from "vue";
-import { useStore } from "../store/store";
-import QuoteCard from "../components/quote-card.vue";
-import Empty from "../components/empty.vue";
+import { useStore } from "../../store/store";
+import { useRouter } from "vue-router";
+import QuoteCard from "../../components/quote-card.vue";
+import Empty from "../../components/empty.vue";
+
+// Set up router
+const route = useRouter();
 
 // Store
 const store = useStore();
@@ -35,8 +39,8 @@ const currentPage = ref(1);
 
 // Computed
 const hasQuotes = computed(() => {
-	if (store.quotes) {
-		return store.quotes.length;
+	if (store.quotes.results) {
+		return store.quotes.results.length;
 	}
 
 	return false;
@@ -45,11 +49,24 @@ const hasQuotes = computed(() => {
 //Methods
 const onClick = (number) => {
 	store.getQuotes(number);
+
+	// route to new pagination result
+	route.push(`/suppliers/quotes/${number}`);
 };
 
 // Hooks
 onMounted(() => {
-	store.getQuotes(1);
+	const page = Number(route.currentRoute.value.params.page);
+
+	store
+		.getQuotes(page)
+		.then(() => {
+			currentPage.value = page;
+		})
+		.catch(() => {
+			// If no results show first page
+			route.push("/suppliers/quotes/1");
+		});
 });
 </script>
 
@@ -60,7 +77,6 @@ onMounted(() => {
 	grid-column: 2 / span 10;
 	height: fit-content;
 	width: 100%;
-	background-color: var(--colour-white);
 	margin-bottom: 1.5rem;
 }
 
@@ -89,7 +105,8 @@ onMounted(() => {
 
 @media only screen and (max-width: 800px) {
 	.quotes-block {
-		grid-template-columns: 1fr;
+		display: flex;
+		flex-direction: column;
 	}
 }
 </style>

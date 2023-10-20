@@ -12,7 +12,7 @@
 				<SupplierCard :data="supplier" />
 			</div>
 			<Empty v-if="!hasSuppliers" value="suppliers" />
-			<div class="pagination">
+			<div class="supplier-pagination">
 				<vue-awesome-paginate
 					v-model="currentPage"
 					:total-items="store.suppliers.count"
@@ -26,9 +26,13 @@
 
 <script setup>
 import { onMounted, ref, computed } from "vue";
-import { useStore } from "../store/store";
-import SupplierCard from "./supplier-card.vue";
-import Empty from "./empty.vue";
+import { useRouter } from "vue-router";
+import { useStore } from "../../store/store";
+import SupplierCard from "../../components/supplier-card.vue";
+import Empty from "../../components/empty.vue";
+
+// Set up router
+const route = useRouter();
 
 // Store
 const store = useStore();
@@ -46,11 +50,24 @@ const hasSuppliers = computed(() => {
 
 const onClick = (number) => {
 	store.getSuppliers(number);
+
+	// route to new pagination result
+	route.push(`/suppliers/${number}`);
 };
 
 // Hooks
 onMounted(() => {
-	store.getSuppliers(1);
+	const page = Number(route.currentRoute.value.params.page);
+
+	store
+		.getSuppliers(page)
+		.then(() => {
+			currentPage.value = page;
+		})
+		.catch(() => {
+			// If no results show first page
+			route.push("/suppliers/1");
+		});
 });
 </script>
 
@@ -61,7 +78,6 @@ onMounted(() => {
 	grid-column: 2 / span 10;
 	height: fit-content;
 	width: 100%;
-	background-color: var(--colour-white);
 	margin-bottom: 1.5rem;
 }
 
@@ -91,16 +107,16 @@ onMounted(() => {
 }
 
 .supplier-card {
-	margin-bottom: 1rem;
+	margin-bottom: 0.5rem;
 }
 
-.pagination {
+.supplier-pagination {
 	display: flex;
 	justify-content: center;
 	padding: 1.5rem 0;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 460px) {
 	.supplier-headings {
 		display: none;
 	}
