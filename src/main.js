@@ -14,6 +14,20 @@ const router = VueRouter.createRouter({
 	routes,
 });
 
+// For when brower refreshes
+pinia.use((context) => {
+	// Sync store with sessionStorage
+	const fromStorage = JSON.parse(window.sessionStorage.getItem("store"));
+
+	if (fromStorage) {
+		context.store.$patch(fromStorage);
+	}
+
+	context.store.$subscribe((mutation, state) => {
+		window.sessionStorage.setItem("store", JSON.stringify(state));
+	});
+});
+
 // register plugins
 app.use(router);
 app.use(pinia);
