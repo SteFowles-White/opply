@@ -59,36 +59,4 @@ import Quotes from "../components/quotes.vue";
 	font-weight: 600;
 	margin-bottom: 1rem;
 }
-
-.content-container {
-	display: flex;
-	flex-direction: column;
-	grid-column: 2 / span 10;
-	height: fit-content;
-	width: 100%;
-	background-color: var(--colour-white);
-	margin-bottom: 1.5rem;
-}
-
-.quotes-block {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 1rem;
-	row-gap: 1rem;
-	padding: 1rem;
-}
-
-/* override quote block layout is no quotes */
-.quotes-block.empty {
-	display: flex;
-	grid-template-columns: 1fr;
-	justify-content: center;
-	margin: 1rem 0;
-}
-
-@media only screen and (max-width: 800px) {
-	.quotes-block {
-		grid-template-columns: 1fr;
-	}
-}
 </style>
