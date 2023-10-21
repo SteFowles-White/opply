@@ -6,14 +6,52 @@
 		</header>
 		<div class="tabs">
 			<div class="tab-container">
-				<router-link class="tab" to="/suppliers/1">Suppliers</router-link>
-				<router-link class="tab" to="/suppliers/quotes/1">Quotes</router-link>
+				<router-link class="tab" :to="`/suppliers/${getSupplierPagionation}`"
+					>Suppliers</router-link
+				>
+				<router-link
+					class="tab"
+					:to="`/suppliers/quotes/${getQuotePagionation}`"
+					>Quotes</router-link
+				>
 			</div>
 			<div class="tab-pannel"><router-view></router-view></div>
 		</div>
 	</div>
 </template>
 
+<script setup>
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+
+// Set up router
+const route = useRouter();
+
+// Computed
+const getQuotePagionation = computed(() => {
+	const urlMatch = route.currentRoute.value.path.includes("/quotes/");
+
+	if (urlMatch) {
+		return Number(route.currentRoute.value.params.page);
+	}
+
+	return 1;
+});
+
+const getSupplierPagionation = computed(() => {
+	const urlMatch = route.currentRoute.value.path.includes("/quotes/");
+
+	if (!urlMatch) {
+		return Number(route.currentRoute.value.params.page);
+	}
+
+	return 1;
+});
+</script>
+
+
+<!-- Add logic to get param  -->
+<!-- if dos not include params -->
 <style scoped>
 .container {
 	display: grid;
