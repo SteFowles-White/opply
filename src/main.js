@@ -4,7 +4,11 @@ import App from "./App.vue";
 import * as VueRouter from "vue-router";
 import routes from "./config/routes";
 import "./utilities/validators";
+import VueAwesomePaginate from "vue-awesome-paginate";
+
+// import the necessary css file
 import "./style.css";
+import "vue-awesome-paginate/dist/style.css";
 
 // Create app
 const app = Vue.createApp(App);
@@ -31,5 +35,6 @@ pinia.use((context) => {
 // register plugins
 app.use(router);
 app.use(pinia);
+app.use(VueAwesomePaginate);
 
 app.mount("#app");

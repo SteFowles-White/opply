@@ -58,22 +58,21 @@ export const useStore = defineStore("store", {
 			});
 		},
 
-		getSuppliers() {
+		getSuppliers(number) {
 			const surpliers = new Suppliers(this.token);
 
-			return surpliers.get().then((result) => {
-				this.suppliers = result.data.results;
+			return surpliers.get(number).then((result) => {
+				this.suppliers = result.data;
 
 				return result;
 			});
 		},
 
-		getQuotes() {
+		getQuotes(number) {
 			const quotes = new Quotes(this.token);
 
-			return quotes.get().then((result) => {
-				console.log(result);
-				this.quotes = result.data.results;
+			return quotes.get(number).then((result) => {
+				this.quotes = result.data;
 
 				return quotes;
 			});

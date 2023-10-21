@@ -4,11 +4,13 @@ class Surpliers extends APIRequest {
 	/**
 	 * Gets all the suppliers from the API
 	 *
+	 * @param id {Number}
+	 *
 	 * @return {Promise}
 	 *
 	 */
-	get() {
-		return this.makeRequest("get", "api/v1/suppliers/");
+	get(number) {
+		return this.makeRequest("get", `api/v1/suppliers/?page=${number}`);
 	}
 
 	/**

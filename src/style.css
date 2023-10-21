@@ -29,3 +29,30 @@
 	line-height: 1.5;
 	font-weight: 400;
 }
+
+/* Pagination css */
+
+.pagination-container {
+	display: flex;
+	column-gap: 10px;
+}
+.paginate-buttons {
+	height: 40px;
+	width: 40px;
+	border-radius: 20px;
+	cursor: pointer;
+	background-color: var(--colour-faded);
+	border: 1px solid rgb(217, 217, 217);
+	color: var(--colour-black);
+}
+.paginate-buttons:hover {
+	background-color: rgb(216, 216, 216);
+}
+.active-page {
+	background-color: var(--colour-light-blue);
+	border: 1px solid var(--colour-light-blue);
+	color: white;
+}
+.active-page:hover {
+	background-color: #2988c8;
+}

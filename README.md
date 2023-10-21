@@ -24,4 +24,4 @@ If you would like to see more information about a given supplier click on the 'S
 
 # Issues
 
-1: Can still add an invalid email address such as stephen@yoyo.com - Althought this is not a required field it would be reviewed in more detail for production to ensure correct domain email address are used
+1: Can add an invalid email address such as stephen@yoyo.com - Althought this is not a required field it would be reviewed in more detail for production to ensure correct domain email address are used
