@@ -6,12 +6,10 @@
 		</header>
 		<div class="tabs">
 			<div class="tab-container">
-				<router-link class="tab" :to="`/suppliers/${getSupplierPagionation}`"
+				<router-link class="tab" :to="`/suppliers/${getSupplierPagination}`"
 					>Suppliers</router-link
 				>
-				<router-link
-					class="tab"
-					:to="`/suppliers/quotes/${getQuotePagionation}`"
+				<router-link class="tab" :to="`/suppliers/quotes/${getQuotePagination}`"
 					>Quotes</router-link
 				>
 			</div>
@@ -28,7 +26,7 @@ import { useRouter } from "vue-router";
 const route = useRouter();
 
 // Computed
-const getQuotePagionation = computed(() => {
+const getQuotePagination = computed(() => {
 	const urlMatch = route.currentRoute.value.path.includes("/quotes/");
 
 	if (urlMatch) {
@@ -38,7 +36,7 @@ const getQuotePagionation = computed(() => {
 	return 1;
 });
 
-const getSupplierPagionation = computed(() => {
+const getSupplierPagination = computed(() => {
 	const urlMatch = route.currentRoute.value.path.includes("/quotes/");
 
 	if (!urlMatch) {
@@ -49,9 +47,6 @@ const getSupplierPagionation = computed(() => {
 });
 </script>
 
-
-<!-- Add logic to get param  -->
-<!-- if dos not include params -->
 <style scoped>
 .container {
 	display: grid;

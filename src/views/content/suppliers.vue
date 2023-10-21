@@ -37,6 +37,7 @@ const route = useRouter();
 // Store
 const store = useStore();
 
+//State
 const currentPage = ref(1);
 
 // Computed
