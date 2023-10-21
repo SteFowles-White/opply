@@ -34,7 +34,11 @@
 
 .pagination-container {
 	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 100%;
 	column-gap: 10px;
+	row-gap: 5px;
 }
 .paginate-buttons {
 	height: 40px;
