@@ -29,11 +29,6 @@ defineRule("email", (value) => {
 	const regex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 	const specialCharacter = /^[!#$%&’*+/=?^`{|}~]+@/;
 
-	// If the field is empty
-	if (!value || !value.length) {
-		return "This field is required";
-	}
-
 	// If the field is not a valid email
 	if (!regex.test(value) || specialCharacter.test(value)) {
 		return "This field must be a valid email address";

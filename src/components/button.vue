@@ -35,6 +35,16 @@ const props = defineProps({
 	cursor: pointer;
 }
 
+.button:disabled {
+	border: 1px solid var(--colour-yellow);
+	background-color: inherit;
+	cursor: not-allowed;
+}
+
+.button:focus {
+	box-shadow: 1px 1px 5px var(--colour-light-grey);
+}
+
 .none {
 	background-color: inherit;
 }

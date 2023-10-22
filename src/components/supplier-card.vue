@@ -2,11 +2,21 @@
 	<div class="supplier-card">
 		<div class="supplier-heading">
 			<h3>{{ formateHeading(data.name) }}</h3>
-			<Button class="supplier-button" @click.prevent="onClick"
-				>{{ showMore ? "Hide" : "Show" }}
+			<Button
+				class="supplier-button"
+				@click.prevent="onClick"
+				:aria-controls="`supplier-pannel-${data.id}`"
+				:aria-expanded="showMore"
+			>
+				{{ showMore ? "Hide" : "Show" }}
 			</Button>
 		</div>
-		<div class="supplier-collapse" v-if="showMore">
+		<div
+			:id="`supplier-pannel-${data.id}`"
+			:hidden="!showMore"
+			class="supplier-collapse"
+			v-if="showMore"
+		>
 			<div v-if="!error" class="supplier-body">
 				<p>Supplier code: {{ companyCode(surplierDetails.name) }}</p>
 				<p>{{ data.description }}</p>

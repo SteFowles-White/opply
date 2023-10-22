@@ -18,18 +18,21 @@
 				>
 					<label :for="field.id" class="label">{{ field.name }}</label>
 					<Field
+						v-model="form[field.id]"
 						:id="field.id"
-						class="input"
 						:name="field.id"
 						:type="field.type"
 						:maxlength="field.maxlength"
 						:rules="field.rules"
+						class="input"
 					/>
 					<ErrorMessage class="warning" :name="field.id" />
 				</div>
 			</div>
-			<div class="warning" v-if="errorMessage">{{ errorMessage }}</div>
-			<div class="submit-container"><Button type="submit">Submit</Button></div>
+			<div class="warning" v-if="errorMes">{{ errorMes }}</div>
+			<div class="submit-container">
+				<Button :disabled="!isEnabled" type="submit">Submit</Button>
+			</div>
 		</div>
 	</Form>
 </template>
@@ -46,7 +49,14 @@ const store = useStore();
 
 // State
 const registering = ref(false);
-const errorMessage = ref("");
+const errorMes = ref("");
+const form = ref({
+	username: "",
+	password: "",
+	first_name: "",
+	last_name: "",
+	email: "",
+});
 
 //Emits
 const emit = defineEmits(["authenticate"]);
@@ -62,6 +72,11 @@ const formField = computed(() => {
 	return registering.value ? signin : signInFields;
 });
 
+const isEnabled = computed(() => {
+	return form.value.username.length > 0 && form.value.password.length > 0;
+	// form.username.value.length && form.password.value.length;
+});
+
 // Methods
 const showRegistrationType = () => {
 	registering.value = !registering.value;
@@ -69,19 +84,19 @@ const showRegistrationType = () => {
 
 const setErrorMessage = (err) => {
 	if (err.response.status !== 400) {
-		errorMessage.value = "Unable to log in";
+		errorMes.value = "Unable to log in";
 
 		return;
 	}
 
 	if (err.response.data.non_field_errors) {
-		errorMessage.value = err.response.data.non_field_errors[0];
+		errorMes.value = err.response.data.non_field_errors[0];
 
 		return;
 	}
 
 	if (err.response.data.username) {
-		errorMessage.value = err.response.data.username[0];
+		errorMes.value = err.response.data.username[0];
 
 		return;
 	}
