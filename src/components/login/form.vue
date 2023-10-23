@@ -74,7 +74,6 @@ const formField = computed(() => {
 
 const isEnabled = computed(() => {
 	return form.value.username.length > 0 && form.value.password.length > 0;
-	// form.username.value.length && form.password.value.length;
 });
 
 // Methods

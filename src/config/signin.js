@@ -36,7 +36,7 @@ export default [
 		name: "Email",
 		type: "email",
 		maxlength: 150,
-		rules: "email",
+		rules: "required|email",
 		default: false,
 	},
 ];
